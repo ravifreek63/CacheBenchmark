@@ -14,5 +14,4 @@ public class Cache {
 			_map.put(count, _value);
 		}
 	}
-
 }

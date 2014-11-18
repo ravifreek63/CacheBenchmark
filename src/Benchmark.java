@@ -21,7 +21,10 @@ public class Benchmark {
 			System.exit(-1);
 		}
 		int numberKeys = Integer.parseInt(args[0]);
+		System.out.println("Creating the Graph");
 		benchmark.createCache(numberKeys);
+		System.out.println("Graph creation done");
+		System.gc();
 		if(args.length < 2){
 			_numberThreads = 8;
 		} else {
