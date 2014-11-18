@@ -7,18 +7,19 @@ public class Worker implements Runnable {
 	private int _workerId;
 	
 	private void getKeys(){
-		int size = _cache.getSize();
+		int size = (int) ((int)_cache.getSize() * 0.01);
+		System.out.println("Size:" + size);
 		HashMap<Integer, String> map = _cache.getMap();
 		Random random = new Random();
 		int key, sizeS = 0;
 		String value;
 		int c;
 		for (int count = 0; count < _numberSamplesPerThread; count++){
-			c = 500;
+//			c = 10000000;
 			key = random.nextInt(size);
 			value = map.get(key);
 			sizeS += value.length();
-			while((c--)>0);
+//			while((c--)>0);
 		}
 		System.out.println("Size  " + sizeS);
 	}
