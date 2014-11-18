@@ -55,7 +55,8 @@ public class Benchmark {
 		executor.shutdown();
 		while(!executor.isTerminated());
 		long lEndTime = System.nanoTime();
-//		long difference = lEndTime - lStartTime;
+		long difference = lEndTime - lStartTime;
+		System.out.println("Total Time:" + difference);
 //		Statistics.setGraphSearchTime(difference);
 //		Statistics.printStats();
 	}
