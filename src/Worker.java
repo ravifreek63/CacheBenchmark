@@ -12,10 +12,13 @@ public class Worker implements Runnable {
 		Random random = new Random();
 		int key, sizeS = 0;
 		String value;
+		int c;
 		for (int count = 0; count < _numberSamplesPerThread; count++){
+			c = 500;
 			key = random.nextInt(size);
 			value = map.get(key);
 			sizeS += value.length();
+			while((c--)>0);
 		}
 		System.out.println("Size  " + sizeS);
 	}
