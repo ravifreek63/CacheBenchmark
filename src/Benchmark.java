@@ -58,6 +58,7 @@ public class Benchmark {
 		long lEndTime = System.nanoTime();
 		long difference = (long) ((lEndTime - lStartTime)/Math.pow(10, 6));
 		System.out.println("Total Time:" + difference + " ms");
+		System.out.println("Total Number of gets/second:" + _numberSamplesPerThread*_numberThreads*1000/(difference)); 
 //		Statistics.setGraphSearchTime(difference);
 //		Statistics.printStats();
 	}
