@@ -16,8 +16,8 @@ public class Worker implements Runnable {
 //		int c;
 		for (int count = 0; count < _numberSamplesPerThread; count++){
 //			c = 10000000;
-			if((count %10000) == 0) 
-				System.out.println("Count" + count);
+//			if((count %10000) == 0) 
+//				System.out.println("Count" + count);
 			key = random.nextInt(size);
 			value = map.get(key);
 			sizeS += value.length();
