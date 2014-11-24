@@ -24,8 +24,10 @@ public class Benchmark {
 		System.out.println("Creating the Graph");
 		benchmark.createCache(numberKeys);
 		System.out.println("Graph creation done");
-		if(args[3].trim().equals("1"))
+		if(args[3].trim().equals("1")){
+			System.out.println("Triggering GC, from the application.");
 			System.gc();
+		}
 		if(args.length < 2){
 			_numberThreads = 8;
 		} else {
