@@ -3,8 +3,8 @@ import java.util.concurrent.ExecutorService;
 
 public class Benchmark {
 	private static Cache _cache;
-	private static int _numberThreads;
-	private static int _numberSamplesPerThread;
+	private static long _numberThreads;
+	private static long _numberSamplesPerThread;
 	
 	public Cache getGraph(){
 		return _cache;
