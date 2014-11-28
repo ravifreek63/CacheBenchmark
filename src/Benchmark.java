@@ -3,8 +3,8 @@ import java.util.concurrent.ExecutorService;
 
 public class Benchmark {
 	private static Cache _cache;
-	private static long _numberThreads;
-	private static long _numberSamplesPerThread;
+	private static int _numberThreads;
+	private static int _numberSamplesPerThread;
 	
 	public Cache getGraph(){
 		return _cache;
@@ -59,8 +59,9 @@ public class Benchmark {
 		while(!executor.isTerminated());
 		long lEndTime = System.nanoTime();
 		long difference = (long) ((lEndTime - lStartTime)/Math.pow(10, 6));
+		long totalSamples = (long)_numberSamplesPerThread*_numberThreads;
 		System.out.println("Total Time:" + difference + " ms");
-		System.out.println("Total Number of gets/second:" + _numberSamplesPerThread*_numberThreads*1000/(difference)); 
+		System.out.println("Total Number of gets/second:" + (totalSamples)*1000/(difference)); 
 //		Statistics.setGraphSearchTime(difference);
 //		Statistics.printStats();
 	}
