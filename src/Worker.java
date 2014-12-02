@@ -14,9 +14,11 @@ public class Worker implements Runnable {
 		int key, sizeS = 0;
 		String value;
 		for (int count = 0; count < _numberSamplesPerThread; count++){
-			key = random.nextInt(size);
-			value = map.get(key);
-			sizeS += value.length();
+			for(int workC=0; workC<100; workC++){
+				key = random.nextInt(size);
+				value = map.get(key);
+				sizeS += value.length();
+			}
 		}
 		System.out.println("Size  " + sizeS);
 	}
