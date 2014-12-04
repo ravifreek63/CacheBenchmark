@@ -5,9 +5,11 @@ public class Worker implements Runnable {
 	private Cache _cache;
 	private int _numberSamplesPerThread;
 	private int _workerId;
+	private int _cacheHit;
 	
 	private void getKeys(){
-		int size = (int) ((int)_cache.getSize() * 0.01);
+		double cacheHitRatio = ((double)_cacheHit)/100;
+		int size = (int) ((int)_cache.getSize() * cacheHitRatio);
 		System.out.println("Size:" + size);
 		HashMap<Integer, String> map = _cache.getMap();
 		Random random = new Random();
@@ -51,9 +53,10 @@ public class Worker implements Runnable {
 		getKeys();
 	}
 	
-	public Worker(Cache c, int samples, int workerId){
+	public Worker(Cache c, int samples, int workerId, int cacheHit){
 		_cache = c; 
 		_numberSamplesPerThread = samples;
 		_workerId = workerId;
+		_cacheHit = cacheHit;
 	}
 }

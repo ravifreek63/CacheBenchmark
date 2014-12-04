@@ -28,6 +28,9 @@ public class Benchmark {
 			System.out.println("Triggering GC, from the application.");
 			System.gc();
 		}
+		if(args.length>5)
+			int cacheHit = Integer.parseInt(args[4]);
+		
 		if(args.length < 2){
 			_numberThreads = 8;
 		} else {
