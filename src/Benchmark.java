@@ -15,6 +15,7 @@ public class Benchmark {
 	}
 	
 	public static void main(String[] args){
+		int cacheHit = 1;
 		Benchmark benchmark = new Benchmark();
 		if(args.length<3){
 			System.out.println("Insufficient number of arguments");
@@ -29,7 +30,7 @@ public class Benchmark {
 			System.gc();
 		}
 		if(args.length>5)
-			int cacheHit = Integer.parseInt(args[4]);
+			cacheHit = Integer.parseInt(args[4]);
 		
 		if(args.length < 2){
 			_numberThreads = 8;
@@ -55,7 +56,7 @@ public class Benchmark {
 		long lStartTime = System.nanoTime();
 		ExecutorService executor = Executors.newFixedThreadPool(_numberThreads);		
 		for(int count = 0; count < _numberThreads; count++){
-			Worker worker = new Worker(_cache, _numberSamplesPerThread, count);
+			Worker worker = new Worker(_cache, _numberSamplesPerThread, count, cacheHit);
 			executor.execute(worker);
 		}
 		executor.shutdown();
