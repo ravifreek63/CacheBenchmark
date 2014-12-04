@@ -21,6 +21,10 @@ public class Benchmark {
 			System.out.println("Insufficient number of arguments");
 			System.exit(-1);
 		}
+		if(args.length>=5)
+			cacheHit = Integer.parseInt(args[4]);
+		System.out.println("cacheHit::" + cacheHit);
+		
 		int numberKeys = Integer.parseInt(args[0]);
 		System.out.println("Creating the Graph");
 		benchmark.createCache(numberKeys);
@@ -29,9 +33,6 @@ public class Benchmark {
 			System.out.println("Triggering GC, from the application.");
 			System.gc();
 		}
-		if(args.length>5)
-			cacheHit = Integer.parseInt(args[4]);
-		System.out.println("cacheHit::" + cacheHit);
 		
 		if(args.length < 2){
 			_numberThreads = 8;
