@@ -58,5 +58,6 @@ public class Worker implements Runnable {
 		_numberSamplesPerThread = samples;
 		_workerId = workerId;
 		_cacheHit = cacheHit;
+		System.out.println("Cache Hit:" + cacheHit);
 	}
 }
