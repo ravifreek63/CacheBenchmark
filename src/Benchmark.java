@@ -31,6 +31,7 @@ public class Benchmark {
 		}
 		if(args.length>5)
 			cacheHit = Integer.parseInt(args[4]);
+		System.out.println("cacheHit::" + cacheHit);
 		
 		if(args.length < 2){
 			_numberThreads = 8;
