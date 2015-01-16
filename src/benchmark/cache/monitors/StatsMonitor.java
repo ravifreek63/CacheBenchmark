@@ -41,8 +41,8 @@ public class StatsMonitor implements Runnable {
 				timeDifference = (((double)(currentTime - _startTime))/(Math.pow(10, 9)));
 				Thread.sleep(1000);
 				totalQueries = findTotalQueries();
-				rate = (double)totalQueries/timeDifference; 
-				System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " time:" + timeDifference);
+				rate = (double)totalQueries/timeDifference/1000; 
+				System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " k, time:" + timeDifference);
 				if(timeDifference>_totalTime){
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
