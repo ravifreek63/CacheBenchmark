@@ -10,6 +10,7 @@ public class Worker implements Runnable {
 	private int _cacheHit;
 	
 	private void getKeys(){
+		int count=0;
 		double cacheHitRatio = ((double)_cacheHit)/100;
 		int size = (int) ((int)_cache.getSize() * cacheHitRatio);
 		int range = (int)(size / StatsMonitor.numberWorkerThreads);
@@ -17,10 +18,14 @@ public class Worker implements Runnable {
 		Random random = new Random();
 		int key1, key2, fanout = Cache.getBranchFactor();
 		while(true){
+				count++;
 				key1 = random.nextInt(range)+startIndex;
 				key2 = random.nextInt(fanout);
 				_cache.getKey(key1, key2);
-				_cache.putKey(key1, key2, 0);
+				if((count%100)==0){
+					_cache.putKey(key1, key2, 0);
+					count=0;
+				}
 				StatsMonitor.incrementQueries(2, _workerId);
 				if(StatsMonitor._shouldStop){
 					return;
