@@ -27,6 +27,7 @@ public class Benchmark {
 		_numberSamplesPerThread = Integer.parseInt(args[3]);
 		int cacheHit = Integer.parseInt(args[4]);
 		int totalTime = Integer.parseInt(args[5]);
+		int getsPerPut = Integer.parseInt(args[6]);
 		benchmark.createCache(numberKeys, fanout);
 		StatsMonitor.init(_numberThreads, totalTime);		
 		System.out.println("Starting Threads ..... ");
@@ -34,7 +35,7 @@ public class Benchmark {
 		long lStartTime = System.nanoTime();
 		ExecutorService executor = Executors.newFixedThreadPool(_numberThreads);		
 		for(int count = 0; count < _numberThreads; count++){
-			Worker worker = new Worker(_cache, _numberSamplesPerThread, count, cacheHit);
+			Worker worker = new Worker(_cache, _numberSamplesPerThread, count, cacheHit, getsPerPut);
 			executor.execute(worker);
 		}
 		executor.shutdown();

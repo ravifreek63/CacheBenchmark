@@ -8,6 +8,7 @@ public class Worker implements Runnable {
 	private int _numberSamplesPerThread;
 	private int _workerId;
 	private int _cacheHit;
+	private int _getsPerPut;
 	
 	private void getKeys(){
 		int count=0;
@@ -22,7 +23,7 @@ public class Worker implements Runnable {
 				key1 = random.nextInt(range)+startIndex;
 				key2 = random.nextInt(fanout);
 				_cache.getKey(key1, key2);
-				if((count%100)==0){
+				if((count%_getsPerPut)==0){
 					_cache.putKey(key1, key2, 0);
 					count=0;
 				}
@@ -43,10 +44,11 @@ public class Worker implements Runnable {
 		}
 	}
 	
-	public Worker(Cache c, int samples, int workerId, int cacheHit){
+	public Worker(Cache c, int samples, int workerId, int cacheHit, int getsPerPut){
 			_cache = c; 
 			_numberSamplesPerThread = samples;
 			_workerId = workerId;
 			_cacheHit = cacheHit;
+			_getsPerPut = getsPerPut;
 	}
 }
