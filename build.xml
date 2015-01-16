@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CacheBenchmark" default="dist" basedir=".">
+<description> Build file for the Cache Benchmark </description>
+
+<property name="src" value="src"></property>
+<property name="build" value="build"></property>
+<property name="dist" value="dist"></property>
+<property name="jars" value="jars"></property>
+<property name="dist-jar" value="${dist}/cacheBenchmark.jar"></property>
+<property name="main-class" value="benchmark.cache.harness.Benchmark"/>
+
+<target name ="createDir" depends="clean" description="creates the necessary directories if they do not exist">
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${build}"/>
+</target>
+
+<path id="jar-classpath">
+   <fileset dir="${jars}">
+      <include name="**/*.jar" />      
+   </fileset>
+</path>	
+
+<target name="compile" depends="createDir" description ="compile task">
+	<javac srcdir="${src}" destdir="${build}">
+	   <classpath refid="jar-classpath"/>
+	</javac>
+</target>
+
+<manifestclasspath property="mf.classpath" jarfile="${dist-jar}">
+	<classpath>
+		<fileset dir="${jars}"><include name="**/*.jar"/></fileset>
+	</classpath>
+</manifestclasspath>
+
+<target name ="dist" depends="compile" description="creates the jar file distribution"> 
+  <jar destfile="${dist-jar}" basedir="${build}">
+  <manifest>
+    <attribute name="Main-Class" value="${main-class}"/>
+  	<attribute name="Class-Path" value="${mf.classpath}"/>
+  </manifest>
+  </jar>
+</target>
+
+<target name="run">
+	<java classname="${main-class}" fork="true">
+		<classpath>
+			<path refid="jar-classpath"/>			
+			<path location = "${build}"/>
+		</classpath>
+	</java>
+</target>
+
+<target name="clean" description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+</target>
+
+</project>
