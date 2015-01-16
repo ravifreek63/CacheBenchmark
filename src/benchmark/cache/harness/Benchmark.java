@@ -7,9 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
 public class Benchmark {
-	private static Cache _cache;
-	private static int _numberThreads;
-	private static int _numberSamplesPerThread;
+	public static Cache _cache;
+	public static int _numberThreads;
+	public static int _numberSamplesPerThread;
 	
 	public Cache getCache(){
 		return _cache;
@@ -28,8 +28,7 @@ public class Benchmark {
 		int cacheHit = Integer.parseInt(args[4]);
 		int totalTime = Integer.parseInt(args[5]);
 		benchmark.createCache(numberKeys, fanout);
-		StatsMonitor.init(_numberThreads, totalTime);
-		StatsMonitor s = new StatsMonitor();
+		StatsMonitor.init(_numberThreads, totalTime);		
 		System.out.println("Starting Threads ..... ");
 		System.gc();
 		long lStartTime = System.nanoTime();

@@ -32,13 +32,18 @@ public class Worker implements Runnable {
 	
 	@Override
 	public void run() {
-		getKeys();
+		if(_workerId==0){
+			StatsMonitor s = new StatsMonitor();
+			s.run();
+		} else {
+			getKeys();
+		}
 	}
 	
 	public Worker(Cache c, int samples, int workerId, int cacheHit){
-		_cache = c; 
-		_numberSamplesPerThread = samples;
-		_workerId = workerId;
-		_cacheHit = cacheHit;
+			_cache = c; 
+			_numberSamplesPerThread = samples;
+			_workerId = workerId;
+			_cacheHit = cacheHit;
 	}
 }

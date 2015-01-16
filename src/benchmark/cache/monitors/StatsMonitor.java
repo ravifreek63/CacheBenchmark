@@ -1,5 +1,7 @@
 package benchmark.cache.monitors;
 
+import benchmark.cache.harness.Benchmark;
+
 public class StatsMonitor implements Runnable {
 	public static int[] totalQueries;
 	public static int numberWorkerThreads;
@@ -32,7 +34,7 @@ public class StatsMonitor implements Runnable {
 		_startTime = System.nanoTime();
     	double timeDifference;
     	double rate;
-    	int totalQueries;
+    	int totalQueries, maxQueries = (Benchmark._numberThreads-1) * (Benchmark._numberSamplesPerThread) * 200;
         try {
 			while(true){
 				long currentTime = System.nanoTime();
@@ -41,7 +43,7 @@ public class StatsMonitor implements Runnable {
 				totalQueries = findTotalQueries();
 				rate = (double)totalQueries/timeDifference; 
 				System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " time:" +timeDifference);
-				if(timeDifference>_totalTime){
+				if(timeDifference>_totalTime || (totalQueries == maxQueries)){
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
 					break;
