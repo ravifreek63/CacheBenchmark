@@ -31,6 +31,7 @@ public class Benchmark {
 		StatsMonitor.init(_numberThreads, totalTime);
 		StatsMonitor s = new StatsMonitor();
 		System.out.println("Starting Threads ..... ");
+		System.gc();
 		long lStartTime = System.nanoTime();
 		ExecutorService executor = Executors.newFixedThreadPool(_numberThreads);		
 		for(int count = 0; count < _numberThreads; count++){
