@@ -26,8 +26,9 @@ public class Worker implements Runnable {
 				if((count%_getsPerPut)==0){
 					_cache.putKey(key1, key2, 0);
 					count=0;
+					StatsMonitor.incrementQueries(1, _workerId);
 				}
-				StatsMonitor.incrementQueries(2, _workerId);
+				StatsMonitor.incrementQueries(1, _workerId);
 				if(StatsMonitor._shouldStop){
 					return;
 				}

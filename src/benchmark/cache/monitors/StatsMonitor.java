@@ -1,9 +1,7 @@
 package benchmark.cache.monitors;
 
-import benchmark.cache.harness.Benchmark;
-
 public class StatsMonitor implements Runnable {
-	public static int[] totalQueries;
+	public static long[] totalQueries;
 	public static int numberWorkerThreads;
 	private long _startTime;
 	public static boolean _shouldStop;
@@ -13,8 +11,8 @@ public class StatsMonitor implements Runnable {
 		totalQueries[id] += value;
 	}
 	
-	public static int findTotalQueries(){
-		int queries = 0;
+	public static long findTotalQueries(){
+		long queries = 0;
 		for(int count=0; count < numberWorkerThreads; count++){
 			queries += totalQueries[count];
 		}
@@ -23,7 +21,7 @@ public class StatsMonitor implements Runnable {
 	
 	public static void init(int nThreads, int totalTime){
 		numberWorkerThreads = nThreads;
-		totalQueries = new int[nThreads];
+		totalQueries = new long[nThreads];
 		_shouldStop = false;
 		_totalTime = totalTime;
 	}
@@ -34,7 +32,7 @@ public class StatsMonitor implements Runnable {
 		_startTime = System.nanoTime();
     	double timeDifference;
     	double rate;
-    	int totalQueries, maxQueries = (Benchmark._numberThreads-1) * (Benchmark._numberSamplesPerThread) * 200;
+    	long totalQueries;
         try {
 			while(true){
 				long currentTime = System.nanoTime();
