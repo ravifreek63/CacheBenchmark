@@ -16,8 +16,7 @@ public class Worker implements Runnable {
 		int startIndex = _workerId*range;
 		Random random = new Random();
 		int key1, key2, fanout = Cache.getBranchFactor();
-		for (int count = 0; count < _numberSamplesPerThread; count++){
-			for(int workC=0; workC<100; workC++){
+		while(true){
 				key1 = random.nextInt(range)+startIndex;
 				key2 = random.nextInt(fanout);
 				_cache.getKey(key1, key2);
@@ -26,7 +25,6 @@ public class Worker implements Runnable {
 				if(StatsMonitor._shouldStop){
 					return;
 				}
-			}
 		}
 	}
 	

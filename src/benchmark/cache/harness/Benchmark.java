@@ -42,6 +42,6 @@ public class Benchmark {
 		long lEndTime = System.nanoTime();
 		long difference = (long) ((lEndTime - lStartTime)/Math.pow(10, 6));
 		long totalQueries = (long)(StatsMonitor.findTotalQueries());
-		System.out.println("Total Number of gets/second:" + (totalQueries)/(difference) + " k."); 
+		System.out.println("Total Number of queries/second:" + (totalQueries)/(difference) + " k."); 
 	}
 }
