@@ -24,7 +24,7 @@ public class Worker implements Runnable {
 				key2 = random.nextInt(fanout);
 				_cache.getKey(key1, key2);
 				if((count%_getsPerPut)==0){
-					//_cache.putKey(key1, key2, 0);
+					_cache.putKey(key1, key2, 0);
 					count=0;
 					StatsMonitor.incrementQueries(1, _workerId);
 				}
