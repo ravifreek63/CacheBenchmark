@@ -41,7 +41,7 @@ public class Worker implements Runnable {
 			StatsMonitor s = new StatsMonitor();
 			s.run();
 		} else {
-			getKeys();
+			while(true);//getKeys();
 		}
 	}
 	
