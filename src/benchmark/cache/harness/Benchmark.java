@@ -3,6 +3,8 @@ import benchmark.cache.dataStore.Cache;
 import benchmark.cache.monitors.StatsMonitor;
 import benchmark.cache.workers.Worker;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
@@ -19,7 +21,7 @@ public class Benchmark {
 		_cache = new Cache(keys, fanout);
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException{
 		Benchmark benchmark = new Benchmark();		
 		int numberKeys = Integer.parseInt(args[0]);
 		int fanout = Integer.parseInt(args[1]);

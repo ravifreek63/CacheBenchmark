@@ -18,11 +18,18 @@ public class Worker implements Runnable {
 		int startIndex = _workerId*range;
 		Random random = new Random();
 		int key1, key2, fanout = Cache.getBranchFactor();
+		int numberGets=10;
 		while(true){
 				count++;
 				key1 = random.nextInt(range)+startIndex;
 				key2 = random.nextInt(fanout);
-				_cache.getKey(key1, key2);
+				long lStartTime = System.nanoTime();
+					for(int ctr=0; ctr<numberGets; ctr++){
+						_cache.getKey(key1, key2);
+					}
+				long lEndTime = System.nanoTime();
+				long difference = lEndTime - lStartTime;
+				StatsMonitor.addQuery(difference/1000);
 				if((count%_getsPerPut)==0){
 					_cache.putKey(key1, key2, 0);
 					count=0;
