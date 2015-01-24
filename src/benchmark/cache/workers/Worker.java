@@ -29,7 +29,7 @@ public class Worker implements Runnable {
 					}
 				long lEndTime = System.nanoTime();
 				long difference = lEndTime - lStartTime;
-				StatsMonitor.addQuery(difference/1000);
+				StatsMonitor.addQuery(difference);
 				if((count%_getsPerPut)==0){
 					_cache.putKey(key1, key2, 0);
 					count=0;
