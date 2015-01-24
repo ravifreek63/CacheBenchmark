@@ -18,7 +18,7 @@ public class Worker implements Runnable {
 		int startIndex = _workerId*range;
 		Random random = new Random();
 		int key1, key2, fanout = Cache.getBranchFactor();
-		int numberGets=10;
+		int numberGets=100;
 		while(true){
 				count++;
 				key1 = random.nextInt(range)+startIndex;
