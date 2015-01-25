@@ -30,8 +30,9 @@ public class Benchmark {
 		int cacheHit = Integer.parseInt(args[4]);
 		int totalTime = Integer.parseInt(args[5]);
 		int getsPerPut = Integer.parseInt(args[6]);
+		String collectorType = args[7];
 		benchmark.createCache(numberKeys, fanout);
-		StatsMonitor.init(_numberThreads, totalTime);		
+		StatsMonitor.init(_numberThreads, totalTime, collectorType, numberKeys/(1000000));		
 		System.out.println("Starting Threads ..... ");
 		System.gc();
 		long lStartTime = System.nanoTime();

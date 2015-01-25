@@ -11,6 +11,8 @@ public class StatsMonitor implements Runnable {
 	public static boolean _shouldStop;
 	private static int _totalTime;
 	private static PrintWriter writer;
+	private static String _collectorType;
+	private static int _nKeys;
 	
 	// The time that is added here is in microseconds
 	public static void addQuery(long time){
@@ -34,14 +36,17 @@ public class StatsMonitor implements Runnable {
 	}
 	
 	private static void openLogFile() throws FileNotFoundException, UnsupportedEncodingException{
-		writer = new PrintWriter("/home/tandon/latency.txt", "UTF-8");
+		String fileName = "/home/tandon/latency_" + _collectorType + "_" + String.valueOf(_nKeys) + ".txt";
+		writer = new PrintWriter(fileName, "UTF-8");
 	}
 	
-	public static void init(int nThreads, int totalTime) throws FileNotFoundException, UnsupportedEncodingException{
+	public static void init(int nThreads, int totalTime, String cType, int nKeys) throws FileNotFoundException, UnsupportedEncodingException{
 		numberWorkerThreads = nThreads;
 		totalQueries = new long[nThreads];
 		_shouldStop = false;
 		_totalTime = totalTime;
+		_collectorType = cType; 
+		_nKeys = nKeys;
 		openLogFile();
 	}
 
