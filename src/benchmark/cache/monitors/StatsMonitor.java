@@ -47,7 +47,7 @@ public class StatsMonitor implements Runnable {
 		_totalTime = totalTime;
 		_collectorType = cType; 
 		_nKeys = nKeys;
-		openLogFile();
+		//openLogFile();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class StatsMonitor implements Runnable {
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
 					System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " k, time:" + timeDifference);
-					closeLogFile();
+					//closeLogFile();
 					break;
 				}
 			}
