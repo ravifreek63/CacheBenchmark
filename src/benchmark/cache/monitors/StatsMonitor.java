@@ -49,7 +49,7 @@ public class StatsMonitor implements Runnable {
 		_collectorType = cType; 
 		_nKeys = nKeys;
 		_maxQueries = maxQueries;
-		openLogFile();
+		//openLogFile();
 	}
 
 	@Override
@@ -66,11 +66,11 @@ public class StatsMonitor implements Runnable {
 				Thread.sleep(1000);
 				totalQueries = findTotalQueries();			
 				rate = (double)totalQueries/timeDifference/1000; 			
-				if(timeDifference>_totalTime || (_maxQueries<=totalQueries && _maxQueries>0)){					
+				if(timeDifference>_totalTime){// || (_maxQueries<=totalQueries && _maxQueries>0)){					
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
 					System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " k, time:" + timeDifference);
-					closeLogFile();
+					//closeLogFile();
 					break;
 				}
 			}
