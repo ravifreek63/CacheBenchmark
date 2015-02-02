@@ -13,6 +13,7 @@ public class StatsMonitor implements Runnable {
 	private static PrintWriter writer;
 	private static String _collectorType;
 	private static int _nKeys;
+	private static int _maxQueries;
 	
 	// The time that is added here is in microseconds
 	public static void addQuery(long time){
@@ -36,18 +37,19 @@ public class StatsMonitor implements Runnable {
 	}
 	
 	private static void openLogFile() throws FileNotFoundException, UnsupportedEncodingException{
-		String fileName = "/home/tandon/latency_" + _collectorType + "_" + String.valueOf(_nKeys) + ".txt";
+		String fileName = "/home/tandon/latencyDataNew/latency_" + _collectorType + "_" + String.valueOf(_nKeys) + ".txt";
 		writer = new PrintWriter(fileName, "UTF-8");
 	}
 	
-	public static void init(int nThreads, int totalTime, String cType, int nKeys) throws FileNotFoundException, UnsupportedEncodingException{
+	public static void init(int nThreads, int totalTime, String cType, int nKeys, int maxQueries) throws FileNotFoundException, UnsupportedEncodingException{
 		numberWorkerThreads = nThreads;
 		totalQueries = new long[nThreads];
 		_shouldStop = false;
 		_totalTime = totalTime;
 		_collectorType = cType; 
 		_nKeys = nKeys;
-		//openLogFile();
+		_maxQueries = maxQueries;
+		openLogFile();
 	}
 
 	@Override
@@ -62,13 +64,13 @@ public class StatsMonitor implements Runnable {
 				long currentTime = System.nanoTime();
 				timeDifference = (((double)(currentTime - _startTime))/(Math.pow(10, 9)));
 				Thread.sleep(1000);
-				totalQueries = findTotalQueries();
+				totalQueries = findTotalQueries();			
 				rate = (double)totalQueries/timeDifference/1000; 			
-				if(timeDifference>_totalTime){
+				if(timeDifference>_totalTime || (_maxQueries<=totalQueries && _maxQueries>0)){					
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
 					System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " k, time:" + timeDifference);
-					//closeLogFile();
+					closeLogFile();
 					break;
 				}
 			}

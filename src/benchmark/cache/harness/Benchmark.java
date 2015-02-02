@@ -12,6 +12,7 @@ public class Benchmark {
 	public static Cache _cache;
 	public static int _numberThreads;
 	public static int _numberSamplesPerThread;
+	private static int _maximumQueries;
 	
 	public Cache getCache(){
 		return _cache;
@@ -31,8 +32,9 @@ public class Benchmark {
 		int totalTime = Integer.parseInt(args[5]);
 		int getsPerPut = Integer.parseInt(args[6]);
 		String collectorType = args[7];
+		_maximumQueries = Integer.parseInt(args[8]);
 		benchmark.createCache(numberKeys, fanout);
-		StatsMonitor.init(_numberThreads, totalTime, collectorType, numberKeys/(1000000));		
+		StatsMonitor.init(_numberThreads, totalTime, collectorType, numberKeys/(1000000), _maximumQueries);		
 		System.out.println("Starting Threads ..... ");
 		System.gc();
 		long lStartTime = System.nanoTime();
