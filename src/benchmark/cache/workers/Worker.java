@@ -21,23 +21,23 @@ public class Worker implements Runnable {
 		int key1, key2, fanout = Cache.getBranchFactor();
 		int setOfKeys=1000;
 		while(true){
-				count++;				
-				//long lStartTime = System.nanoTime();
-				//for(int counter=0; counter<setOfKeys; counter++){
+				long lStartTime = System.nanoTime();
+				for(int counter=0; counter<setOfKeys; counter++){
 					key1 = random.nextInt(range)+startIndex;
 					key2 = random.nextInt(fanout);
 					_cache.getKey(key1, key2);
-				//}
-				//long lEndTime = System.nanoTime();
-				//long difference = (long) (lEndTime - lStartTime);
-				//StatsMonitor.addQuery(difference);
-				if((count%_getsPerPut)==0){
+				}
+				long lEndTime = System.nanoTime();
+				long difference = (long) (lEndTime - lStartTime);
+				StatsMonitor.addQuery(difference);
+				/* count++;
+				 * if((count%_getsPerPut)==0){
 					key1 = random.nextInt(range)+startIndex;
 					key2 = random.nextInt(fanout);
 					_cache.putKey(key1, key2, 0);
 					count=0;
 					StatsMonitor.incrementQueries(1, _workerId);
-				}
+				}*/
 				StatsMonitor.incrementQueries(1, _workerId);
 				if(StatsMonitor._shouldStop){
 					return;

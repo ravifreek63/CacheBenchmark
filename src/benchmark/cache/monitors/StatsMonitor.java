@@ -37,7 +37,7 @@ public class StatsMonitor implements Runnable {
 	}
 	
 	private static void openLogFile() throws FileNotFoundException, UnsupportedEncodingException{
-		String fileName = "/home/tandon/latencyDataNew/latency_" + _collectorType + "_" + String.valueOf(_nKeys) + ".txt";
+		String fileName = "/home/tandon/latencyDataNew2/latency_" + _collectorType + "_" + String.valueOf(_nKeys) + ".txt";
 		writer = new PrintWriter(fileName, "UTF-8");
 	}
 	
@@ -49,7 +49,7 @@ public class StatsMonitor implements Runnable {
 		_collectorType = cType; 
 		_nKeys = nKeys;
 		_maxQueries = maxQueries;
-		//openLogFile();
+		openLogFile();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class StatsMonitor implements Runnable {
 					System.out.println("Exiting in the stats monitor thread");
 					_shouldStop = true;
 					System.out.println("Queries Done:" + findTotalQueries() + ", rate:" + rate + " k, time:" + timeDifference);
-					//closeLogFile();
+					closeLogFile();
 					break;
 				}
 			}
