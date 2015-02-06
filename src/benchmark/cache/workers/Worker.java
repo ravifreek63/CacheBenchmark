@@ -21,7 +21,7 @@ public class Worker implements Runnable {
 		int key1, key2, fanout = Cache.getBranchFactor();
 		int setOfKeys=1000;
 		while(true){
-				//count++;				
+				count++;				
 				//long lStartTime = System.nanoTime();
 				//for(int counter=0; counter<setOfKeys; counter++){
 					key1 = random.nextInt(range)+startIndex;
